@@ -1,0 +1,327 @@
+<html lang="pt-BR"><head>
+<meta charset="UTF-8">
+<title>Orçamento Telas Mosquiteiras</title>
+<style>
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #1e1e1e;
+  color: #eee;
+  margin: 0;
+  padding: 0;
+
+  /* centralizar container no meio da tela */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+  background: #2c2c2c;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 18px rgba(0,0,0,0.5);
+  text-align: center; /* centraliza tudo dentro */
+}
+
+h2, h3 {
+  text-align: center;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #ccc;
+  text-align: center; /* centraliza labels também */
+}
+
+input, select {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  margin-top: 5px;
+  background: #3a3a3a;
+  color: #eee;
+  text-align: center; /* centraliza texto dentro dos inputs */
+}
+input:focus, select:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 4px #e74c3c77;
+  outline: none;
+}
+
+/* botões centralizados e mais elegantes */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.2s;
+  background: #8b0000;
+  color: #fff;
+  margin: 8px auto;
+  display: block;
+  max-width: 300px; /* evita botão muito largo */
+}
+button:hover {
+  background: #a00000;
+}
+
+button.add { width: 100%; margin-top: 12px; }
+button.send, button.clear { margin-top: 8px; width: auto; display: block; }
+
+.screens-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.screen-item {
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 10px;
+  background: #3a3a3a;
+  display: flex;
+  flex-direction: column;
+}
+.screen-header { font-weight: 600; margin-bottom: 5px; font-size: 14px; text-align: center; color:#eee; }
+.screen-row { display: flex; flex-direction: column; margin-bottom: 5px; }
+.value-display { background: #555; padding: 6px 8px; border-radius: 6px; font-weight: 600; text-align: center; margin-top: 4px; color:#fff; }
+
+.total-box { background: #444; padding: 12px; border-radius: 8px; margin-top: 10px; font-weight: bold; font-size: 15px; text-align: center; }
+</style>
+<style type="text/css" id="operaUserStyle"></style></head>
+<body>
+<div class="container">
+  <h2>Orçamento Telas Mosquiteiras</h2>
+
+  <label>Nome</label>
+  <input id="nome" type="text" placeholder="Digite seu nome">
+
+  <label>Telefone</label>
+  <input id="telefone" type="text" placeholder="(13) 99999-9999">
+
+  <label>Endereço</label>
+  <input id="endereco" type="text" placeholder="Rua / Av, nº">
+
+  <label>Bairro</label>
+  <input id="bairro" type="text" placeholder="Digite o bairro">
+
+  <h3>Telas</h3>
+  <div id="screens" class="screens-grid"><div class="screen-item">
+    <div class="screen-header">Nova Tela</div>
+    <div class="screen-row">
+      <label>Ambiente</label>
+      <input class="ambient" type="text" placeholder="Ex: Quarto da filha" value="">
+    </div>
+    <div class="screen-row">
+      <label>Tipo da Tela</label>
+      <select class="tipo">
+        <option value="removivel" selected="">Tela Removível</option>
+        <option value="correr">Tela de Correr</option>
+        <option value="tecido">Troca de Tecido</option>
+      </select>
+    </div>
+    <div class="screen-row">
+      <label>Altura (m)</label>
+      <input class="height" type="number" step="0.01" placeholder="1.20" value="">
+    </div>
+    <div class="screen-row">
+      <label>Largura (m)</label>
+      <input class="width" type="number" step="0.01" placeholder="0.80" value="">
+    </div>
+    <div class="screen-row">
+      <label>Preço</label>
+      <div class="value-display">R$ 0,00</div>
+    </div>
+    <button class="remove" onclick="removeScreen(0)">❌ Remover</button>
+  </div><div class="screen-item">
+    <div class="screen-header">Nova Tela</div>
+    <div class="screen-row">
+      <label>Ambiente</label>
+      <input class="ambient" type="text" placeholder="Ex: Quarto da filha" value="">
+    </div>
+    <div class="screen-row">
+      <label>Tipo da Tela</label>
+      <select class="tipo">
+        <option value="removivel" selected="">Tela Removível</option>
+        <option value="correr">Tela de Correr</option>
+        <option value="tecido">Troca de Tecido</option>
+      </select>
+    </div>
+    <div class="screen-row">
+      <label>Altura (m)</label>
+      <input class="height" type="number" step="0.01" placeholder="1.20" value="">
+    </div>
+    <div class="screen-row">
+      <label>Largura (m)</label>
+      <input class="width" type="number" step="0.01" placeholder="0.80" value="">
+    </div>
+    <div class="screen-row">
+      <label>Preço</label>
+      <div class="value-display">R$ 0,00</div>
+    </div>
+    <button class="remove" onclick="removeScreen(1)">❌ Remover</button>
+  </div><div class="screen-item">
+    <div class="screen-header">Nova Tela</div>
+    <div class="screen-row">
+      <label>Ambiente</label>
+      <input class="ambient" type="text" placeholder="Ex: Quarto da filha" value="">
+    </div>
+    <div class="screen-row">
+      <label>Tipo da Tela</label>
+      <select class="tipo">
+        <option value="removivel" selected="">Tela Removível</option>
+        <option value="correr">Tela de Correr</option>
+        <option value="tecido">Troca de Tecido</option>
+      </select>
+    </div>
+    <div class="screen-row">
+      <label>Altura (m)</label>
+      <input class="height" type="number" step="0.01" placeholder="1.20" value="">
+    </div>
+    <div class="screen-row">
+      <label>Largura (m)</label>
+      <input class="width" type="number" step="0.01" placeholder="0.80" value="">
+    </div>
+    <div class="screen-row">
+      <label>Preço</label>
+      <div class="value-display">R$ 0,00</div>
+    </div>
+    <button class="remove" onclick="removeScreen(2)">❌ Remover</button>
+  </div></div>
+  <button class="add" onclick="addScreen()">➕ Adicionar Tela</button>
+
+  <div class="total-box" id="totalBox">Total: R$&nbsp;0,00 </div>
+
+  <button class="send" onclick="sendWhatsApp()">📲 Enviar Orçamento</button>
+  <button class="clear" onclick="resetForm()">🗑️ Limpar Tudo</button>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+let screens = [];
+
+function formatBRL(value){ return value.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
+
+// nomes bonitos
+const tipoLabels = {
+  removivel: "Tela Removível",
+  correr: "Tela de Correr",
+  tecido: "Troca de Tecido"
+};
+
+// cálculo dependendo do tipo
+function calcValue(h,w,tipo){ 
+  if(!h || !w) return 0; 
+  switch(tipo){
+    case 'removivel':
+      return (h+0.1)*(w+0.1)*329*1.05;
+    case 'correr':
+      return (h*w*419) + (1.1*1.1);
+    case 'tecido':
+      return (h*w*119) + (1.1*1.1);
+    default:
+      return 0;
+  }
+}
+
+function createScreen(index){
+  const div=document.createElement('div'); 
+  div.className='screen-item';
+  div.innerHTML=`
+    <div class="screen-header">${screens[index].ambient || 'Nova Tela'}</div>
+    <div class="screen-row">
+      <label>Ambiente</label>
+      <input class="ambient" type="text" placeholder="Ex: Quarto da filha" value="${screens[index].ambient || ''}">
+    </div>
+    <div class="screen-row">
+      <label>Tipo da Tela</label>
+      <select class="tipo">
+        <option value="removivel" ${screens[index].tipo==='removivel'?'selected':''}>Tela Removível</option>
+        <option value="correr" ${screens[index].tipo==='correr'?'selected':''}>Tela de Correr</option>
+        <option value="tecido" ${screens[index].tipo==='tecido'?'selected':''}>Troca de Tecido</option>
+      </select>
+    </div>
+    <div class="screen-row">
+      <label>Altura (m)</label>
+      <input class="height" type="number" step="0.01" placeholder="1.20" value="${screens[index].h || ''}">
+    </div>
+    <div class="screen-row">
+      <label>Largura (m)</label>
+      <input class="width" type="number" step="0.01" placeholder="0.80" value="${screens[index].w || ''}">
+    </div>
+    <div class="screen-row">
+      <label>Preço</label>
+      <div class="value-display">${screens[index].v ? formatBRL(screens[index].v) : 'R$ 0,00'}</div>
+    </div>
+    <button class="remove" onclick="removeScreen(${index})">❌ Remover</button>
+  `;
+
+  const ambient=div.querySelector('.ambient');
+  const height=div.querySelector('.height');
+  const width=div.querySelector('.width');
+  const tipo=div.querySelector('.tipo');
+  const valueDisplay=div.querySelector('.value-display');
+  const header=div.querySelector('.screen-header');
+
+  ambient.oninput=e=>{
+    screens[index].ambient=e.target.value; 
+    header.innerText=e.target.value || 'Nova Tela';
+  };
+
+  function updateValue(){
+    screens[index].h=parseFloat(height.value)||0;
+    screens[index].w=parseFloat(width.value)||0;
+    screens[index].tipo=tipo.value;
+    screens[index].v=calcValue(screens[index].h,screens[index].w,screens[index].tipo);
+    valueDisplay.innerText=formatBRL(screens[index].v);
+    calcTotals();
+  }
+
+  height.oninput=updateValue;
+  width.oninput=updateValue;
+  tipo.oninput=updateValue;
+
+  return div;
+}
+
+function render(){ $('screens').innerHTML=''; screens.forEach((s,i)=>$('screens').appendChild(createScreen(i))); calcTotals(); }
+function addScreen(){ screens.push({ambient:'',h:0,w:0,v:0,tipo:'removivel'}); render(); }
+function removeScreen(i){ screens.splice(i,1); render(); }
+
+function calcTotals(){ 
+  const total=screens.reduce((s,t)=>s+(t.v||0),0);
+  $('totalBox').innerText=`Total: ${formatBRL(total)} `;
+  return total;
+}
+
+function sendWhatsApp(){
+  let nome=$('nome').value, tel=$('telefone').value, end=$('endereco').value, bairro=$('bairro').value;
+  let total=calcTotals();
+  let msg=`*Orçamento Telas Mosquiteiras*%0A%0A`;
+  msg+=`👤 Nome: ${nome}%0A📞 Telefone: ${tel}%0A🏠 Endereço: ${end}, Bairro: ${bairro}%0A%0A`;
+  screens.forEach((s,i)=>{
+    msg+=`Tela ${i+1} - ${s.ambient}%0ATipo: ${tipoLabels[s.tipo]}%0AAltura: ${s.h}m | Largura: ${s.w}m%0AValor: ${formatBRL(s.v)}%0A%0A`;
+  });
+  msg+=`💰 Total: ${formatBRL(total)}`;
+  window.open(`https://wa.me/551341412112?text=${msg}`,'_blank');
+}
+
+function resetForm(){ $('nome').value=''; $('telefone').value=''; $('endereco').value=''; $('bairro').value=''; screens=[]; render(); }
+
+render();
+</script>
+
+
+</body></html>
